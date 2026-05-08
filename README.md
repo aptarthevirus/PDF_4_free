@@ -1,45 +1,74 @@
-# Free4U
-## A simple PDF Downloader
-# 🚀 features 
-### Direct URL Downloads:
-  Fetch and save PDF files by simply pasting the link
-### Error Handling:
-  Includes built-in alerts for invalid URLs or server-side CORS restrictions.
-### Responsive Design:
-  A centered, user-friendly layout with a modern color palette.
-## Tech Stack
-  ### HTML:
-    For the structure of the downloader.
-  ### CSS3:
-  Custom styling using a flexbox layout and rounded containers.
-  ### JavaScript:
-  Handles the asynchronous fetch requests and Blob object creation for downloads.
-  ## 📂 Project Structure
-The project consists of three core files:
+# PDF Downloader - Free4U
 
- ### pdf.html: 
- The main entry point containing the interface elements.  
+A simple, elegant PDF downloader web application built with HTML, CSS, and JavaScript.
 
-### PDF.CSS: 
-The stylesheet that handles the look, feel, and button hover effects.  
+## 🚀 Features
 
-### pdf.js: 
-The logic that processes the URL and triggers the browser's download action.
+- **Direct URL Downloads**: Fetch and save PDF files by pasting the direct link
+- **Error Handling**: Built-in validation and helpful error messages for invalid URLs and CORS restrictions
+- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
+- **Modern UI**: Clean, professional interface with smooth animations and gradients
+- **Lightweight**: No dependencies, pure vanilla JavaScript
 
+## 🛠️ Tech Stack
 
-# 📝 How to Use
-Open pdf.html in any modern web browser.  
+- **HTML5**: Semantic structure
+- **CSS3**: Modern styling with gradients, animations, and flexbox layout
+- **JavaScript (ES6)**: Async/await for file downloads and blob handling
 
-### Enter the direct link to a PDF file in the input field.  
+## 📂 Project Files
 
-### Click the Download PDF button.  
+| File | Purpose |
+|------|---------|
+| `index.html` | Main entry point with the user interface |
+| `PDF.CSS` | Modern styling and responsive design |
+| `pdf.js` | Download logic and error handling |
 
-### The file will be processed and automatically saved to your device as file.pdf
-## for demo visist 
-https://aptarvirus.github.io/Free4U/
+## 📝 How to Use
 
+1. **Open the app**: Open `index.html` in any modern web browser
+2. **Enter URL**: Paste the direct link to a PDF file in the input field
+3. **Download**: Click the "Download PDF" button
+4. **Save**: The file will automatically download to your device
 
+### Example PDF URLs to Test
+- https://www.w3.org/WAI/WCAG21/Techniques/pdf/pdf.pdf
+- https://www.adobe.io/content/dam/udp/assets/open/pdf/HelloWorld.pdf
 
-  <img width="1366" height="768" alt="PDF" src="https://github.com/user-attachments/assets/0f9d5ddb-1556-4bd1-bedf-d5db12cf0031" />
+## ⚠️ Important Notes
 
-  
+- **CORS Restrictions**: Some PDF servers may block cross-origin requests. If you see a CORS error, the PDF must be downloaded directly.
+- **Direct Links Only**: Paste direct links to PDF files (URLs ending in `.pdf` or returning `application/pdf` content-type)
+- **No Backend Required**: This app works entirely in the browser
+
+## 🌐 Live Demo
+
+Visit the live demo: https://aptarthevirus.github.io/PDF_4_free/
+
+## 🔧 Recent Fixes (v2.0)
+
+- ✅ Fixed HTML file naming for GitHub Pages (renamed to `index.html`)
+- ✅ Changed HTTP method from POST to GET for proper PDF downloads
+- ✅ Improved URL validation and error handling
+- ✅ Enhanced CSS with modern gradients and animations
+- ✅ Added responsive design for mobile devices
+- ✅ Better error messages for common issues (CORS, empty files, invalid URLs)
+- ✅ Dynamic filename extraction from URL
+
+## 🐛 Known Limitations
+
+- **CORS Policy**: Many PDF hosting services restrict cross-origin requests for security
+- **File Size**: Large PDFs may take time to download depending on connection speed
+- **Browser Support**: Requires modern browser with ES6 and Fetch API support
+
+## 📜 License
+
+Open source and free to use
+
+## 👤 Author
+
+Created by aptarthevirus
+
+---
+
+**Tip**: For best results, use PDFs that allow cross-origin requests or are hosted on the same domain.
