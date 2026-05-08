@@ -30,10 +30,7 @@ A simple, elegant PDF downloader web application built with HTML, CSS, and JavaS
 2. **Enter URL**: Paste the direct link to a PDF file in the input field
 3. **Download**: Click the "Download PDF" button
 4. **Save**: The file will automatically download to your device
-
-### Example PDF URLs to Test
-- https://www.w3.org/WAI/WCAG21/Techniques/pdf/pdf.pdf
-- https://www.adobe.io/content/dam/udp/assets/open/pdf/HelloWorld.pdf
+## note: no log in needed.
 
 ## ⚠️ Important Notes
 
@@ -47,7 +44,6 @@ Visit the live demo: https://aptarthevirus.github.io/PDF_4_free/
 
 ## 🔧 Recent Fixes (v2.0)
 
-- ✅ Fixed HTML file naming for GitHub Pages (renamed to `index.html`)
 - ✅ Changed HTTP method from POST to GET for proper PDF downloads
 - ✅ Improved URL validation and error handling
 - ✅ Enhanced CSS with modern gradients and animations
@@ -61,14 +57,12 @@ Visit the live demo: https://aptarthevirus.github.io/PDF_4_free/
 - **File Size**: Large PDFs may take time to download depending on connection speed
 - **Browser Support**: Requires modern browser with ES6 and Fetch API support
 
-## 📜 License
-
 Open source and free to use
 
 ## 👤 Author
 
-Created by aptarthevirus
+Created by aptarthevirus or Aptar Hussain
 
 ---
 
-**Tip**: For best results, use PDFs that allow cross-origin requests or are hosted on the same domain.
+<img width="1366" height="768" alt="updated" src="https://github.com/user-attachments/assets/1aa1199a-6bc3-41bf-9ecc-e9483dfbeb5d" />
