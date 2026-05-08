@@ -9,57 +9,60 @@ document.getElementById("pdf").addEventListener("click", async function() {
 
     if (!url) {
         msg.textContent = "Please enter a valid URL";
+        msg.style.color = "red";
         return;
     }
 
-    // Helper function to get the CSRF token
-    const getCookie = (name) => {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-        return null;
-    };
+    // Validate URL format
+    try {
+        new URL(url);
+    } catch (e) {
+        msg.textContent = "Please enter a valid URL";
+        msg.style.color = "red";
+        return;
+    }
 
     try {
         msg.textContent = "Starting download...";
+        msg.style.color = "blue";
         
-        const csrfToken = getCookie("csrftoken");
-        
-        // 2. Fetch configuration
+        // 2. Use GET request for PDF downloads (most PDFs don't expect POST)
         const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                // Only attach token if it exists to avoid sending "undefined" string
-                ...(csrfToken && { "X-CSRF-TOKEN": csrfToken })
-            },
-            body: JSON.stringify({}), // POST requests usually expect a body
-            credentials: "same-origin" 
+            method: "GET",
+            mode: "cors",
+            credentials: "omit"
         });
 
         // 3. Handle non-OK responses (e.g., 403 Forbidden, 404 Not Found)
         if (!response.ok) {
-            const errorText = await response.text(); // Try to get server error message
-            throw new Error(`Server responded with ${response.status}: ${errorText}`);
+            throw new Error(`Server error: ${response.status} ${response.statusText}`);
         }
 
         // 4. Validate Content-Type (Ensure it's actually a PDF)
         const contentType = response.headers.get("Content-Type");
         if (!contentType || !contentType.includes("application/pdf")) {
-            console.warn("The received file might not be a PDF.");
+            console.warn("Warning: The received file might not be a PDF. Content-Type:", contentType);
         }
 
         const blob = await response.blob();
+        
+        // Ensure we have a valid blob
+        if (blob.size === 0) {
+            throw new Error("Downloaded file is empty");
+        }
+
         const blobUrl = window.URL.createObjectURL(blob);
 
-        // 5. Improved Download Logic
+        // 5. Download Logic
         const link = document.createElement("a");
         link.href = blobUrl;
         
-        // Use a dynamic name if provided by the server, otherwise default
-        link.download = "downloaded_file.pdf";
+        // Extract filename from URL or use default
+        const urlParts = url.split('/');
+        const filename = urlParts[urlParts.length - 1] || "downloaded_file.pdf";
+        link.download = filename.includes('.pdf') ? filename : "downloaded_file.pdf";
         
-        link.style.display = "none"; // Ensure it doesn't affect layout
+        link.style.display = "none";
         document.body.appendChild(link);
         link.click();
 
@@ -74,7 +77,14 @@ document.getElementById("pdf").addEventListener("click", async function() {
 
     } catch (error) {
         console.error("Download Error:", error);
-        msg.textContent = `Error: ${error.message}`;
+        
+        // Provide helpful error messages
+        let errorMessage = error.message;
+        if (error.message.includes("Failed to fetch")) {
+            errorMessage = "CORS Error: The PDF server doesn't allow cross-origin requests. Try downloading directly.";
+        }
+        
+        msg.textContent = `Error: ${errorMessage}`;
         msg.style.color = "red";
     }
 });
