@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
+    windowMs: 15 * 60 * 1000, 
     max: 100,
     message: 'Too many download requests from this IP, please try again later.',
     standardHeaders: true,
@@ -42,11 +42,11 @@ function isSafeUrl(url) {
             /^10\./,
             /^172\.(1[6-9]|2[0-9]|3[0-1])\./, // 172.16.0.0 - 172.31.255.255
             /^192\.168\./,
-            /^169\.254\./, // Link-local addresses
+            /^169\.254\./, // 
             /^255\.255\.255\.255$/,
-            /^::1$/, // IPv6 localhost
-            /^fc00:/i, // IPv6 private
-            /^fe80:/i, // IPv6 link-local
+            /^::1$/, // 
+            /^fc00:/i, //
+            /^fe80:/i, // 
         ];
 
 
