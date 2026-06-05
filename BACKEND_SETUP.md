@@ -2,6 +2,8 @@
 
 This guide provides step-by-step instructions to deploy the PDF downloader backend to multiple platforms.
 
+
+
 ## Table of Contents
 1. [Local Testing](#local-testing)
 2. [Railway Deployment](#railway-deployment-recommended)
@@ -172,29 +174,15 @@ Railway is the easiest and fastest option. Free tier includes $5/month credits.
    - Start Command: `npm start`
    - Plan: Free tier available
 
-5. **Environment Variables**
-   - Add from `.env.example`:
-   ```
-   PORT=3000
-   NODE_ENV=production
-   ```
-
-6. **Deploy**
-   - Click "Create Web Service"
-   - Wait for deployment (3-5 minutes)
-
-7. **Your URL:**
-   - Format: `https://pdf-downloader-backend.onrender.com`
-
 ---
 
-## DigitalOcean Deployment
+# DigitalOcean Deployment
 
-### Prerequisites
+## Prerequisites
 - DigitalOcean account
 - $5/month App Platform credit available
 
-### Steps
+## Steps
 
 1. **Go to DigitalOcean**
    - Visit https://digitalocean.com
@@ -224,14 +212,16 @@ Railway is the easiest and fastest option. Free tier includes $5/month credits.
 
 ---
 
-## AWS EC2 Deployment
+# AWS EC2 Deployment
 
-### Prerequisites
+# Prerequisites
 - AWS account
 - EC2 instance created (Ubuntu 20.04 recommended)
 - SSH access to instance
 
-### Steps
+# Steps
+
+
 
 1. **Connect to your instance:**
    ```bash
@@ -296,7 +286,6 @@ Railway is the easiest and fastest option. Free tier includes $5/month credits.
 
 ---
 
-## Configuration
 
 ### Environment Variables
 
@@ -330,13 +319,6 @@ const limiter = rateLimit({
 
 ---
 
-## Troubleshooting
-
-### "Port 3000 already in use"
-```bash
-lsof -i :3000  # Find process
-kill -9 <PID>  # Kill it
-```
 
 ### "Cannot find module 'express'"
 ```bash
@@ -352,6 +334,7 @@ npm install
 - Make sure frontend is pointing to backend URL
 - Check `public/pdf.js` API endpoint
 - Ensure backend is deployed and running
+
 
 ### "Server won't start on my platform"
 - Check Node.js version: `node --version` (need 14+)
@@ -379,6 +362,7 @@ const response = await fetch(API_URL, {
 
 ## Performance Tips
 
+
 1. **Enable gzip compression:**
    ```javascript
    const compression = require('compression');
@@ -392,17 +376,6 @@ const response = await fetch(API_URL, {
 3. **Monitor with:**
    - Railway/Render/Heroku dashboards
    - CloudWatch (AWS)
-   - PM2 Plus (AWS EC2)
 
 ---
 
-## Next Steps
-
-1. ✅ Choose your deployment platform
-2. ✅ Follow the deployment steps
-3. ✅ Test the `/health` endpoint
-4. ✅ Update frontend with backend URL
-5. ✅ Test full PDF download workflow
-6. ✅ Merge to main branch
-
-Happy downloading! 🎉
