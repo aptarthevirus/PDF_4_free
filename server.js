@@ -27,13 +27,15 @@ app.get('/health', (req, res) => {
     res.status(200).json({ status: 'OK', message: 'Server is running' });
 });
 
-// SSRF Protection utility
 function isSafeUrl(url) {
     try {
         const parsedUrl = new URL(url);
         const hostname = parsedUrl.hostname;
 
-        // Blocked patterns for private/internal IPs
+        // 
+
+
+        
         const blockedPatterns = [
             /^localhost$/i,
             /^127\./,
@@ -48,6 +50,10 @@ function isSafeUrl(url) {
             /^fe80:/i, // IPv6 link-local
         ];
 
+
+
+
+        
         return !blockedPatterns.some(pattern => pattern.test(hostname));
     } catch (e) {
         return false;
@@ -67,7 +73,10 @@ app.post('/api/download-pdf', async (req, res) => {
             });
         }
 
-        // Validate URL format
+        // 
+
+
+        
         try {
             new URL(url);
         } catch (e) {
@@ -85,7 +94,11 @@ app.post('/api/download-pdf', async (req, res) => {
             });
         }
 
-        // Fetch with timeout
+        //
+
+
+
+        
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 30000);
 
@@ -99,7 +112,8 @@ app.post('/api/download-pdf', async (req, res) => {
             clearTimeout(timeoutId);
         }
 
-        // Check if response is successful
+        // 
+        // successful
         if (!response.ok) {
             return res.status(response.status).json({
                 success: false,
@@ -107,7 +121,9 @@ app.post('/api/download-pdf', async (req, res) => {
             });
         }
 
-        // Validate Content-Type is PDF
+
+
+        
         const contentType = response.headers.get('content-type');
         if (!contentType || !contentType.includes('application/pdf')) {
             return res.status(400).json({
@@ -116,7 +132,8 @@ app.post('/api/download-pdf', async (req, res) => {
             });
         }
 
-        // Check declared content length
+
+        
         const contentLength = response.headers.get('content-length');
         const MAX_SIZE = 100 * 1024 * 1024; // 100MB
 
@@ -127,13 +144,16 @@ app.post('/api/download-pdf', async (req, res) => {
             });
         }
 
-        // Set response headers
+      
+        
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', 'attachment; filename=downloaded.pdf');
 
-        // Track downloaded bytes and validate during streaming
+     
+        
         let downloadedBytes = 0;
 
+        
         response.body.on('data', (chunk) => {
             downloadedBytes += chunk.length;
             if (downloadedBytes > MAX_SIZE) {
@@ -145,7 +165,7 @@ app.post('/api/download-pdf', async (req, res) => {
             }
         });
 
-        // Handle stream errors
+        
         response.body.on('error', (error) => {
             console.error('Response stream error:', error);
             if (!res.headersSent) {
@@ -158,7 +178,7 @@ app.post('/api/download-pdf', async (req, res) => {
             }
         });
 
-        // Pipe the response
+        
         response.body.pipe(res).on('error', (error) => {
             console.error('Pipe error:', error);
             if (!res.headersSent) {
@@ -172,6 +192,7 @@ app.post('/api/download-pdf', async (req, res) => {
     } catch (error) {
         console.error('Download Error:', error);
 
+        
         if (error.name === 'AbortError') {
             return res.status(504).json({
                 success: false,
@@ -193,3 +214,7 @@ app.post('/api/download-pdf', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`PDF Downloader Server running on port ${PORT}`);
 });
+
+
+
+
