@@ -1,4 +1,4 @@
-document.getElementById("pdf").addEventListener(" click ", async function() {
+document.getElementById("pdf").addEventListener("click", async function() {
     const urlInput = document.getElementById("pdfurl");
     const msg = document.getElementById("msg");
     
@@ -52,7 +52,7 @@ document.getElementById("pdf").addEventListener(" click ", async function() {
         const link = document.createElement("a");
         link.href = blobUrl;
         
-     
+      
         const urlParts = url.split('/');
         const filename = urlParts[urlParts.length - 1] || "downloaded_file.pdf";
         link.download = filename.includes('.pdf') ? filename : "downloaded_file.pdf";
